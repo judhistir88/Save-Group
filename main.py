@@ -56,18 +56,9 @@ async def files_handler(bot: Client, cmd: Message):
             await db.delete_user(cmd.from_user.id)
     forward = await forwardMessage(cmd)
     if cmd.from_user.is_bot:
-        text = "This File will be deleted in 10 minutes.\n\n" \
-               "But,\n" \
-               "File Stored in Database!\n" \
-               f"**File Name:** `{media.file_name}`\n\n" \
-               f"[👉 Get File Now 👈](https://t.me/{(await Bot.get_me()).username}?start=AbirHasan2005_{str(forward.message_id)})"
+        text = " "
     else:
-        text = f"{cmd.from_user.mention} Unkil,\n" \
-               "This File will be deleted in 10 minutes.\n\n" \
-               "But,\n" \
-               "Your File stored in Database!\n\n" \
-               f"**File Name:** `{media.file_name}`\n\n" \
-               f"[👉 Get Your File Now 👈](https://t.me/{(await Bot.get_me()).username}?start=AbirHasan2005_{str(forward.message_id)})"
+        text = " "
     await sendMessage(
         bot=bot,
         message_id=cmd.message_id,
@@ -84,10 +75,7 @@ async def files_handler(bot: Client, cmd: Message):
 @User.on_message(filters.private & (filters.text | filters.sticker) & ~filters.edited)
 async def text_handler(_, cmd: Message):
     await cmd.reply_text(
-        "Hi Unkil!\n"
-        "I am Group Files Store Userbot.\n\n"
-        "Add me to Group I will Save Group Files & Delete Them After 10 Minutes. Also I will Reply with Revive Link.\n"
-        "**Demo Group:** [Discovery Cloud](https://t.me/joinchat/O9WIjhCGHLo0YmQ0)",
+        "()",
         disable_web_page_preview=True
     )
 
@@ -127,7 +115,7 @@ async def start_handler(bot: Client, event: Message):
         try:
             await bot.forward_messages(chat_id=event.chat.id, from_chat_id=Config.DB_CHANNEL_ID, message_ids=file_id)
         except:
-            await sendMessage(bot, "Unable to Get Message!\n\nReport at @DevsZone !!", event.message_id, event.chat.id)
+            await sendMessage(bot, "Unable to Get Message", event.message_id, event.chat.id)
 
 
 @Bot.on_chat_member_updated()
